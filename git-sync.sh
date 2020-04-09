@@ -40,6 +40,7 @@ echo "$SSH_PRIVATE_KEY_SOURCE" > /root/.ssh/id_rsa
 chmod 600 /root/.ssh/id_rsa
 cp /root/.ssh/* ~/.ssh/ 2> /dev/null || true
 git clone "$SOURCE_REPO" --origin source && cd `basename "$SOURCE_REPO" .git`
+echo 'Cloned existing repo...'
 
 mkdir -p /root/.ssh
 echo "$SSH_PRIVATE_KEY_DESTINATION" > /root/.ssh/id_rsa
@@ -48,3 +49,4 @@ cp /root/.ssh/* ~/.ssh/ 2> /dev/null || true
 git remote add destination "$DESTINATION_REPO"
 
 git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f
+echo 'Pushed to remote'
