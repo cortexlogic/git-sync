@@ -42,7 +42,10 @@ cp /root/.ssh/* ~/.ssh/ 2> /dev/null || true
 git clone "$SOURCE_REPO" --origin source && cd `basename "$SOURCE_REPO" .git`
 echo 'Cloned existing repo...'
 
+echo 'removing .github/workflows...'
+ls -lrt
 rm .github/workflows/ -r
+ls -lrt
 
 mkdir -p /root/.ssh
 echo "$SSH_PRIVATE_KEY_DESTINATION" > /root/.ssh/id_rsa
