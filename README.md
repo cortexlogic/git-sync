@@ -35,8 +35,7 @@ To Sync all branches from source to destination, use `SOURCE_BRANCH: "refs/remot
 
 ### Docker
 ```
-docker run --rm -e "SSH_PRIVATE_KEY=$(cat ~/.ssh/id_rsa)" $(docker build -q .) \
-  $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
+docker run --rm -e "SSH_PRIVATE_KEY_DESTINATION=$(cat ../../test_rsa)" -e "SSH_PRIVATE_KEY_SOURCE=$(cat ../../test2)" $(docker build -q .) $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
 ```
 
 ## Author
