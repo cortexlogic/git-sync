@@ -1,15 +1,8 @@
 # Git Sync
 
 A GitHub Action for syncing between two independent repositories (and independent accounts) using **force push**. 
+
 The modification from forked repo is to enable this to happen between seperate accounts. 
-
-
-## Features
- * Sync branches between two GitHub repositories
- * Sync branches to/from a remote repository
- * GitHub action can be triggered on a timer or on push
- * To sync with current repository, please checkout [Github Repo Sync](https://github.com/marketplace/actions/github-repo-sync)
-
 
 ## Usage
 
@@ -29,7 +22,8 @@ jobs:
         SOURCE_BRANCH: ""
         DESTINATION_REPO: ""
         DESTINATION_BRANCH: ""
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_PRIVATE_KEY_SOURCE: ${{ secrets.SSH_PRIVATE_KEY_SOURCE }}
+        SHH_PRIVATE_KEY_DESTINATION: ${{ secrets.SSH_PRIVATE_KEY_DESTINATION }}
       with:
         args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
 ```
@@ -47,6 +41,7 @@ docker run --rm -e "SSH_PRIVATE_KEY=$(cat ~/.ssh/id_rsa)" $(docker build -q .) \
 
 ## Author
 [Wei He](https://github.com/wei) _github@weispot.com_
++ modification by Micah
 
 
 ## License
