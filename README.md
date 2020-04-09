@@ -1,6 +1,7 @@
 # Git Sync
 
-A GitHub Action for syncing between two independent repositories using **force push**. 
+A GitHub Action for syncing between two independent repositories (and independent accounts) using **force push**. 
+The modification from forked repo is to enable this to happen between seperate accounts. 
 
 
 ## Features
