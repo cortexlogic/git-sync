@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: repo-sync
-      uses: wei/git-sync@v1
+      uses: cortexlogic/git-sync@v1
       env:
         SOURCE_REPO: ""
         SOURCE_BRANCH: ""
