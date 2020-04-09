@@ -2,10 +2,6 @@
 
 set -e
 
-SOURCE_REPO=$1
-SOURCE_BRANCH=$2
-DESTINATION_REPO=$3
-DESTINATION_BRANCH=$4
 
 echo 'starting action'
 echo $SOURCE_REPO
