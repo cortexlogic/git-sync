@@ -43,15 +43,18 @@ git clone "$SOURCE_REPO" --origin source && cd `basename "$SOURCE_REPO" .git`
 echo 'Cloned existing repo...'
 
 echo 'removing .github/workflows...'
-ls -lrt
-rm .github/workflows/ -r
-ls -lrt
+rm .github/ -r
+
+git branch
+git checkout $SOURCE_BRANCH
 
 mkdir -p /root/.ssh
 echo "$SSH_PRIVATE_KEY_DESTINATION" > /root/.ssh/id_rsa
 chmod 600 /root/.ssh/id_rsa
 cp /root/.ssh/* ~/.ssh/ 2> /dev/null || true
 git remote add destination "$DESTINATION_REPO"
+
+echo 'added remote destination...'
 
 git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f
 echo 'Pushed to remote'
