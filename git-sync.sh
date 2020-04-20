@@ -10,6 +10,7 @@ echo $DESTINATION_REPO
 echo $DESTINATION_BRANCH
 echo $SSH_PRIVATE_KEY_SOURCE
 echo $SSH_PRIVATE_KEY_DESTINATION
+echo $DESTINATION_URL
 
 if ! echo $SOURCE_REPO | grep '.git'
 then
@@ -22,14 +23,21 @@ then
     SOURCE_REPO="https://github.com/${SOURCE_REPO}.git"
   fi
 fi
-if ! echo $DESTINATION_REPO | grep '.git'
+if [ -z ${DESTINATION_URL+x} ]
 then
-  if [[ -n "$SSH_PRIVATE_KEY_DESTINATION" ]]
+  echo "DESTINATION_URL is unset"
+  if ! echo $DESTINATION_REPO | grep '.git'
   then
-    DESTINATION_REPO="git@github.com:${DESTINATION_REPO}.git"
-  else
-    DESTINATION_REPO="https://github.com/${DESTINATION_REPO}.git"
+    if [[ -n "$SSH_PRIVATE_KEY_DESTINATION" ]]
+    then
+      DESTINATION_REPO="git@github.com:${DESTINATION_REPO}.git"
+    else
+      DESTINATION_REPO="https://github.com/${DESTINATION_REPO}.git"
+    fi
   fi
+else
+  echo "DESTINATION_URL is set to '$DESTINATION_URL'"
+  DESTINATION_REPO=$DESTINATION_URL
 fi
 
 echo "SOURCE=$SOURCE_REPO:$SOURCE_BRANCH"
@@ -42,8 +50,8 @@ cp /root/.ssh/* ~/.ssh/ 2> /dev/null || true
 git clone "$SOURCE_REPO" --origin source && cd `basename "$SOURCE_REPO" .git`
 echo 'Cloned existing repo...'
 
-echo 'removing .github/workflows...'
-rm .github/ -r
+#echo 'removing .github/workflows...'
+#rm .github/ -r
 
 git branch
 git checkout $SOURCE_BRANCH
